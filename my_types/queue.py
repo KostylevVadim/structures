@@ -32,27 +32,3 @@ class Queue:
             return None
         
 
-# class Stack_by_Queue:
-#     def __init__(self, **kwargs):
-#         if kwargs.get('queue'):
-            
-#             self.__list = kwargs['queue']
-#         else:
-            
-#             self.__list = Queue()
-    
-#     def push(self, a):
-#         self.__list.Enqueue(a)
-    
-#     def pop(self):
-        
-        
-#         temp_queue = Queue()
-#         len = 0
-#         while self.__list.isEmpty()==0:
-#             temp_queue.Enqueue(self.__list.Dequeue())
-#             len+=1
-        
-
-#     def isEmpty(self):
-#         return self.__list.isEmpty()
