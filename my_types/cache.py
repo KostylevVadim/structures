@@ -1,3 +1,5 @@
+import json
+
 class Cache():
     def __init__(self, data: list, limit :int):
         x = {data[i]:data.count(data[i]) for i in range(len(data))}
@@ -12,8 +14,7 @@ class Cache():
             s+='\nData '+ str(key)+ ' requested '+ str(value)+ ' times'
         return s
         
-        
-
+    
     def add(self, data):
         if data in self.__cache.keys():
              self.__cache[data]+=1
@@ -31,11 +32,21 @@ class Cache():
         for key, value in self.__cache.items():
             if value == x:
                 return key
+    
     def get_least_requested(self):
         x = min(self.__cache.values())
         for key, value in self.__cache.items():
             if value == x:
                 return key
+            
+    def dump_cache_to_json(self):
+        string = self.__cache
+        with open("data.json", "w") as json_file:
+            json.dump(string, json_file)
+
+
+
+        
 
 
 
