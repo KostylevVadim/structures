@@ -7,4 +7,4 @@
 
 В function_stack - функции для работы со стеком.
 
-В collections_learner - функции для работы с типами данных из collections.
+
