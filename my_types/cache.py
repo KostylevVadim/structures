@@ -1,4 +1,3 @@
-from collections import Counter
 class Cache():
     def __init__(self, data: list, limit :int):
         x = {data[i]:data.count(data[i]) for i in range(len(data))}
