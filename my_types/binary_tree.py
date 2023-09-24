@@ -8,8 +8,8 @@ class Node:
         
     def __str__(self) -> str:
         s1 = str(self.__data)
-        if self.head:
-            s1 += ' Head is: '+str(self.head.get_data())
+        # if self.head:
+        #     s1 += ' Head is: '+str(self.head.get_data())
         return 'Data in node: ' + s1
         
     def get_data(self):
@@ -31,7 +31,7 @@ class BinaryTree:
     def root(self):
         return self.__root
     
-    def _tree_shower(self, node: Node):
+    def __tree_shower(self, node: Node):
         if node is None:
             return
         str1 =''
@@ -40,9 +40,9 @@ class BinaryTree:
         str1+='('
         if node.left is not None:
             
-            str1+=self._tree_shower(node.left)
+            str1+=self.__tree_shower(node.left)
         if node.right is not None:
-            str1+=' '+self._tree_shower(node.right)
+            str1+=' '+self.__tree_shower(node.right)
         str1+=')'
         return str1
 
@@ -54,9 +54,9 @@ class BinaryTree:
             
             str1+=str(self.__root)+'\n('
             if self.__root.left is not None:
-                str1+=self._tree_shower(self.__root.left)
+                str1+=self.__tree_shower(self.__root.left)
             if self.__root.right is not None:
-                str1+=' '+self._tree_shower(self.__root.right)
+                str1+=' '+self.__tree_shower(self.__root.right)
             str1+=')'
         return str1
     
@@ -72,7 +72,7 @@ class BinaryTree:
             return [cura, 'RIGHT', 'YES']
         elif cura.get_data() < a and cura.right is not None:
             return self.__find_place(cura.right, a)
-            
+    
 
 
     def add(self, data):
@@ -81,19 +81,19 @@ class BinaryTree:
         elif self.__root.get_data() == data:
             return
         elif self.__root.get_data()> data:
-            print('goleft')
+            ##print('goleft')
             if self.__root.left is None:
                 self.__root.left = Node(data, None, None, self.__root)
             else:
                 x = self.__find_place(self.__root.left, data)
-                print(str(x[0]))
+                ##print(str(x[0]))
                 if x[2] == 'YES':
                     if x[1] == 'LEFT':
                         x[0].left = Node(data, None, None, x[0])
                     else:
                         x[0].right = Node(data, None, None, x[0])
         elif self.__root.get_data()<data:
-            print('goright')
+            ##print('goright')
             if self.__root.right is None:
                 self.__root.right = Node(data, None, None, self.__root)
             else:
@@ -131,6 +131,118 @@ class BinaryTree:
 
     def go_with_high(self):
         self.__goer(self.__root)
+    
+    def __find_last_left(self, node: Node):
+        temp = node
+        pr = temp
+        while temp.left is not None:
+            
+            temp = temp.left
+            
+        
+        return temp
+
+    def __remove_element(self, node: Node):
+        if node.left is None and node.right is None:
+            #Оба left и right пустые, мы тогда просто удаляем эелемент
+            pr = node.head
+            
+            if pr.get_data()>node.get_data():
+                pr.left = None
+            else:
+                pr.right = None
+            
+            return node
+        elif node.left is not None and node.right is None:
+            
+            if node.head:
+                if node.head.get_data()>node.get_data():
+                    
+                    node.head.left = node.left
+                    node.left.head = node.head
+                else:
+                    
+                    node.head.right = node.left
+                    node.left.head = node.head
+                #print(node)
+                return node
+            else:
+                self.__root = node.left
+                self.__root.head = None
+                
+        elif node.right is not None and node.left is None:
+            
+            if node.head:
+                if node.head.get_data()>node.get_data():
+                    
+                    node.head.left = node.right
+                    node.right.head = node.head
+                else:
+                    
+                    node.head.right = node.right
+                    node.right.head = node.head
+                return node
+            else:
+                self.__root = node.right
+                self.__root.head = None
+        elif node.right is not None and node.left is not None:
+            right = node.right
+            left = node.left
+            head = node.head
+            x = self.__find_last_left(right)
+            y = self.__remove_element(x)
+            if node.head is None:
+                right = node.right
+                left = node.left
+                self.__root = y
+                y.left = left
+                y.right = right
+                return 
+             
+            if node.get_data()>head.get_data():
+                right = node.right
+                left = node.left
+                head = node.head
+                head.right = y
+                y.left = left
+                y.right = right
+            else:
+                right = node.right
+                left = node.left
+                head = node.head
+                head.left = y
+                y.left = left
+                y.right  = right
+
+                
+                  
+                    
+                
+            
+
+        return
+    
+    def remove(self, data):
+        if self.__root is None:
+            return
+        
+        else:
+            x = self.__find_place(self.__root,data)
+            if x is not None:
+                
+                if x[2] != 'NO':
+                    s = 'No such data'
+                    return s
+                else:
+                    node = x[0]
+                    print('here1')
+
+                    self.__remove_element(node)
+            else:
+                s = 'No such data'
+                return s
+    
+
 
 
 
