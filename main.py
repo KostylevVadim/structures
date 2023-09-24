@@ -15,9 +15,9 @@ x.add(16)
 x.add(11)
 x.add(13)
 x.add(14)
-print(x.show_tree())
+print(x)
 x.remove(10)
-print(x.show_tree())
+print(x)
 
 
 

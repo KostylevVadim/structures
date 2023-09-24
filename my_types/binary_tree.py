@@ -28,8 +28,7 @@ class BinaryTree:
     
     
     
-    def root(self):
-        return self.__root
+    
     
     def __tree_shower(self, node: Node):
         if node is None:
@@ -46,7 +45,7 @@ class BinaryTree:
         str1+=')'
         return str1
 
-    def show_tree(self):
+    def __str__(self):
         str1 = ''
         if self.__root is None:
             print('NO data')
@@ -144,7 +143,7 @@ class BinaryTree:
 
     def __remove_element(self, node: Node):
         if node.left is None and node.right is None:
-            #Оба left и right пустые, мы тогда просто удаляем эелемент
+            
             pr = node.head
             
             if pr.get_data()>node.get_data():
@@ -235,8 +234,7 @@ class BinaryTree:
                     return s
                 else:
                     node = x[0]
-                    print('here1')
-
+                    
                     self.__remove_element(node)
             else:
                 s = 'No such data'

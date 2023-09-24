@@ -96,7 +96,7 @@ class Hashtable_new:
         s1+='Reserved: '+ str(self.get_rezerved_size())
         return s1        
 
-    def _rehash(self):
+    def __rehash(self):
         count = 0
         for i in range(len(self.__list)):
             count+=self.__list[i].count(None)
