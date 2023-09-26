@@ -41,11 +41,13 @@ class Cache():
             
     def dump_cache_to_json(self):
         string = self.__cache
+        
         with open("data.json", "w") as json_file:
             json.dump(string, json_file)
 
     def load_from_json(self):
         self.__cache = {}
+
         with open("data.json", "r") as json_file:
             data = json.load(json_file)
             for key, value in data.items():
