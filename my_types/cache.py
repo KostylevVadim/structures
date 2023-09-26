@@ -44,7 +44,15 @@ class Cache():
         with open("data.json", "w") as json_file:
             json.dump(string, json_file)
 
+    def load_from_json(self):
+        self.__cache = {}
+        with open("data.json", "r") as json_file:
+            data = json.load(json_file)
+            for key, value in data.items():
+                if len(self.__cache) < self.__limit:
+                    self.__cache[int(key)] = value
 
+    
 
         
 
